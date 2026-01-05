@@ -7,7 +7,7 @@ db = SQLAlchemy()
 csrf = CSRFProtect()
 
 def create_app(config_class='config.Config'):
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder='../templates')
     app.config.from_object(config_class)
     
     db.init_app(app)
