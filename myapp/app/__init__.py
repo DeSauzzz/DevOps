@@ -2,6 +2,8 @@ from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from prometheus_client import Counter, Histogram, Gauge
+from .logger import log_metric
+from datetime import datetime
 import time
 import os
 
@@ -42,7 +44,22 @@ def setup_metrics(app):
         if hasattr(request, 'start_time'):
             if request.path == '/metrics':
                 return response
+            
             status_code = str(response.status_code)
+            
+            labels = {
+                'method': request.method,
+                'endpoint': request.path,
+                'status': status_code
+            }
+        
+            log_metric(
+                metric_name='app_http_requests_total',
+                labels=labels,
+                value=1,
+                timestamp=datetime.utcnow().isoformat()
+            )
+            
             duration = time.time() - request.start_time
             REQUEST_DURATION.labels(endpoint=request.path).observe(duration)
             REQUESTS_TOTAL.labels(method=request.method, endpoint=request.path, status=status_code).inc()
