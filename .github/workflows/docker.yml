@@ -1,0 +1,22 @@
+name: Docker CI
+
+on:
+  push:
+    branches: [ main, devel ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build Image
+      run: docker build -t app .
+
+    - name: Run container test
+      run: docker run -it --name app --network host app
+           sleep 5
+           docker ps | grep app
