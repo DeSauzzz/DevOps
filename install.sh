@@ -11,7 +11,7 @@ service postgresql start && \
 sudo systemctl enable && sudo systemctl start && \
 sudo -u postgres psql <<EOF
 CREATE DATABASE myapp_db;
-ALTER USER postgres WITH PASSWORD 'password';
+ALTER USER postgres WITH PASSWORD 'postgres';
 EOF
 exit && \
 echo "База данных создана"
