@@ -20,4 +20,5 @@ jobs:
       run: |
         docker run -d --name app --network host app
         sleep 5
-        docker ps | grep app
+        docker ps -a | grep app
+        docker inspect app --format='{{.State.Status}} {{.State.ExitCode}}'
