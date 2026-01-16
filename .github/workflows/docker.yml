@@ -17,6 +17,7 @@ jobs:
       run: docker build -t app .
 
     - name: Run container test
-      run: docker run -t --name app --network host app
-           sleep 5
-           docker ps | grep app
+      run: |
+        docker run -d --name app --network host app
+        sleep 5
+        docker ps | grep app
