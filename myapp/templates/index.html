@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Добро пожаловать в мое приложение!</h1>
+    <p class="lead">Это веб-приложение с использованием Flask и PostgreSQL</p>
+    <hr class="my-4">
+    <p>Функции приложения:</p>
+    <ul class="list-group list-group-flush mb-4">
+        <li class="list-group-item">Работа с базой данных PostgreSQL</li>
+        <li class="list-group-item">Веб-интерфейс с Bootstrap</li>
+        <li class="list-group-item">API endpoints</li>
+        <li class="list-group-item">Полные тесты</li>
+    </ul>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('main.items') }}" role="button">Посмотреть элементы</a>
+    <a class="btn btn-success btn-lg" href="{{ url_for('main.add_item') }}" role="button">Добавить элемент</a>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">База данных</h5>
+                <p class="card-text">Используется PostgreSQL для хранения данных с SQLAlchemy ORM</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Веб-интерфейс</h5>
+                <p class="card-text">Адаптивный интерфейс с использованием Bootstrap 5</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Тестирование</h5>
+                <p class="card-text">Полное покрытие тестами с использованием pytest</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

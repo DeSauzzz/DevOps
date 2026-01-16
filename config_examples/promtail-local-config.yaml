@@ -1,0 +1,31 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /var/lib/promtail/positions.yaml
+
+clients:
+  - url: http://localhost:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: system
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: varlogs
+          __path__: /var/log/*log
+
+  - job_name: goapp
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: goapp
+          __path__: /home/adminstd/examples/app.log
+
+  - job_name: devops
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: devops
+          __path__: /home/adminstd/Final/DevOps/myapp/logs/metrics.log
